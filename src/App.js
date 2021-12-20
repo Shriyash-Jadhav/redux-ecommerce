@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import "./App.css";
+import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import Home from "./Pages/Home/Home";
+import Contact from "./Pages/Contact/Contact";
+import About from "./Pages/About/About";
+import NotFound from "./Pages/NotFound/NotFound";
+import MyAccount from "./Pages/MyAccount/MyAccount";
+import SingleProduct from "./Pages/SingleProduct/SingleProduct";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" exact render={() => <Navigate to="/home" />} />
+				<Route path="/home" exact element={<Home />} />
+				<Route path="/home/:id" exact element={<SingleProduct />} />
+				<Route path="/contact" exact element={<Contact />} />
+				<Route path="/about" exact element={<About />} />
+				<Route path="/my-account" exact element={<MyAccount />} />
+				<Route path="*" exact element={<NotFound />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
