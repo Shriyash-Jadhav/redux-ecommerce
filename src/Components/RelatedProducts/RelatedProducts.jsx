@@ -1,135 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import axios from "axios";
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faStarHalf, faShoppingCart, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
     Card,
     Container,
     Row,
-    Col,
-    Nav
+    Col
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRelatedProducts } from "../../Redux/Action/ProductsAction";
-import Navbar from '../../Components/Navbar/Navbar'
-import Footer from '../../Components/Footer/Footer'
-import "./SingleProduct.css";
-import RelatedProducts from '../../Components/RelatedProducts/RelatedProducts';
-const SingleProduct = () => {
-    const [product, setProduct] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+import "../../Pages/SingleProduct/SingleProduct.css";
+const RelatedProducts = () => {
+
     const dispatch = useDispatch();
     const { relatedProducts, loading, error } = useSelector((state) => state.relatedProducts);
     useEffect(() => {
         dispatch(fetchRelatedProducts())
     }, [dispatch]);
-    console.log("relatedProduct", relatedProducts);
-    let { id } = useParams();
-    useEffect(() => {
-        setProduct(id)
-        axios
-            .get(`https://fakestoreapi.com/products/${id}`)
-            .then((res) => {
-                setIsLoading(false);
-                setProduct(res.data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
-    if (isLoading) {
-        return (
-            <div
-                style={{
-                    textAlign: "center",
-                    marginTop: "2rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <h1>Loading...</h1>
-            </div>
-        );
-    }
+
     return (
         <div>
-            <Navbar />
-            <div
-                style={{
-                    textAlign: "center",
-                    backgroundColor: "#F7F7F7",
-                    padding: "24px",
-                }}
-            >
-                <p>
-                    Home{" "}
-                    <strong style={{ fontWeight: "500", color: "#000000" }}>
-                        {" "}
-                        / {product?.title}
-                    </strong>{" "}
-                </p>
-            </div>
+
             <Container className="singleproductdisplay-row">
-                <Row>
-                    <>
-                        <Col xs="12" sm="6">
-                            <img src={product?.image} alt="" className="singleproduct-image" />
-                        </Col>
-                        <Col xs="12" sm="6">
-                            <h3 className="singleproduct-category">{product?.category}</h3>
-                            <h4 className="singleproduct-title">{product?.title}</h4>
-                            <FontAwesomeIcon
-                                icon={faStar}
-                                className="single-product-rating-star"
-                            />
-                            <FontAwesomeIcon
-                                icon={faStar}
-                                className="single-product-rating-star"
-                            />
-                            <FontAwesomeIcon
-                                icon={faStar}
-                                className="single-product-rating-star"
-                            />
-                            <FontAwesomeIcon
-                                icon={faStar}
-                                className="single-product-rating-star"
-                            />
-                            <FontAwesomeIcon
-                                icon={faStarHalf}
-                                className="single-product-rating-star"
-                            />
-                            <h4 className="singleproduct-price">$ {product?.price} /-</h4>
-                            <p className="singleproduct-description">{product?.description}</p>
-                            <div>
-                                <button className="hero-product-btn">Buy Now</button>
-                                {/* {isAlreadyInCart === false ? (
-                                    <button
-                                        className="hero-product-cart-btn"
-                                        onClick={() => handlecart(data)}
-                                    >
-                                        Add To Cart
-                                    </button>
-                                ) : (
-                                    <button
-                                        className="hero-product-cart-btn"
-                                        onClick={() => handlecart(data)}
-                                    >
-                                        Remove To Cart
-                                    </button>
-                                )} */}
-                                <button
-                                    className="hero-product-cart-btn"
-                                // onClick={() => handlecart(data)}
-                                >
-                                    Add To Cart
-                                </button>
-                            </div>
-                        </Col>
-                    </>
-                </Row>
+
                 <div
                     style={{
                         padding: "35px 0px",
@@ -345,12 +239,83 @@ const SingleProduct = () => {
                         </TabPane>
                     </TabContent> */}
 
-                    <RelatedProducts />
+                    <div style={{ margin: "50px 0px 0px 0px" }}>
+                        <h2 style={{ textAlign: "center", color: "#000000" }}>
+                            <strong>Related Products</strong>
+                        </h2>
+                        <Row>
+                            {relatedProducts && relatedProducts.map((list) => (
+                                <Col xs="12" sm="3">
+                                    <Card className="product-list" key={list?.id}>
+                                        <Card.Img
+                                            className="product-img"
+                                            src={list?.image}
+                                            alt="Card image cap"
+                                        />
+                                        <a
+                                            href={`/home/${list?.id}`}
+                                            style={{ textDecoration: "none" }}
+                                        >
+                                            <div className="shop-btn-div">
+                                                <FontAwesomeIcon
+                                                    icon={faShoppingCart}
+                                                    className="product-list-shop-btn"
+                                                />
+                                                <FontAwesomeIcon
+                                                    icon={faEye}
+                                                    className="product-list-shop-btn"
+                                                />
+                                                <FontAwesomeIcon
+                                                    icon={faHeart}
+                                                    className="product-list-shop-btn"
+                                                />
+                                            </div>
+                                        </a>
+                                    </Card>
+                                    <Card.Body>
+                                        <Card.Title className="product-title" tag="h5">
+                                            {list?.title.length > 25
+                                                ? list?.title.slice(0, 25) + "..."
+                                                : list?.title}
+                                        </Card.Title>
+                                        {/* <CardSubtitle tag="h6" className="mb-2 text-muted">
+											Description
+										</CardSubtitle>
+										<CardText>
+											{list?.description.length > 100
+												? list?.description.slice(0, 100) + "..."
+												: list?.description}
+										</CardText> */}
+                                        {/* {isAlreadyInCart === false ? (
+										<button
+											className="hero-product-cart-btn"
+											onClick={() => handlecart(singleProducts)}
+										>
+											Add To Cart
+										</button>
+									) : (
+										<button
+											className="hero-product-cart-btn"
+											onClick={() => handlecart(singleProducts)}
+										>
+											Remove To Cart
+										</button>
+									)} */}
+                                        <div style={{ display: "flex" }}>
+                                            <p>${list?.price} -</p>
+                                            <p style={{ color: "#FA6BFF", marginLeft: "10px" }}>
+                                                <strike>${Math.round(list?.price + 50)}</strike>
+                                            </p>
+                                        </div>
+                                    </Card.Body>
+                                </Col>
+                            ))}
+                        </Row>
+                    </div>
                 </div>
             </Container>
-            <Footer />
         </div>
     )
 }
 
-export default SingleProduct
+export default RelatedProducts

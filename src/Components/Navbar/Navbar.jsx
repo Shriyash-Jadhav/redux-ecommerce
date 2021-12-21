@@ -37,7 +37,7 @@ const Example = (props) => {
                         <Nav.Link
                             className="nav-items"
                             style={{ color: "black" }}
-                            href="/"
+                            href="/home"
                         >
                             Home
                         </Nav.Link>
@@ -64,26 +64,26 @@ const Example = (props) => {
                         <Nav.Link
                             className="nav-items"
                             style={{ color: "black" }}
-                            href="/"
+                            href="/home"
                         >
                             Blogs
                         </Nav.Link>
 
-
+                        {/* 
                         <Nav.Link
                             className="nav-items"
                             style={{ color: "black" }}
                             href="/my-account"
                         >
                             My Account
-                        </Nav.Link>
+                        </Nav.Link> */}
 
 
 
                         <Nav.Link
                             className="nav-items"
                             style={{ color: "black" }}
-                            href="/"
+                            href="/home"
                         >
                             <FontAwesomeIcon icon={faUser} />
                         </Nav.Link>

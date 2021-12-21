@@ -8,19 +8,19 @@ const initialState = {
 
 const RelatedProductsReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case ActionType.PRODUCTS_REQUEST:
+		case ActionType.RELATED_PRODUCTS_REQUEST:
 			console.log("Loading");
 			return {
 				...state,
 				loading: true,
 			};
-		case ActionType.PRODUCTS_SUCCESS:
+		case ActionType.RELATED_PRODUCTS_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				relatedProducts: action.payload,
 			};
-		case ActionType.PRODUCTS_FAIL:
+		case ActionType.RELATED_PRODUCTS_FAIL:
 			console.log("Error");
 			return {
 				...state,
