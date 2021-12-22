@@ -22,3 +22,38 @@ export const fetchRelatedProducts = () => async (dispatch) => {
 		dispatch({ type: ActionType.RELATED_PRODUCTS_FAIL });
 	}
 };
+
+export const addToCart = (itemID) => {
+	return {
+		type: ActionType.ADD_TO_CART,
+		payload: {
+			id: itemID,
+		},
+	};
+};
+
+export const removeFromCart = (itemID) => {
+	return {
+		type: ActionType.REMOVE_FROM_CART,
+		payload: {
+			id: itemID,
+		},
+	};
+};
+
+export const adjustItemQty = (itemID, qty) => {
+	return {
+		type: ActionType.ADJUST_ITEM_QTY,
+		payload: {
+			id: itemID,
+			qty,
+		},
+	};
+};
+
+export const loadCurrentItem = (item) => {
+	return {
+		type: ActionType.LOAD_CURRENT_ITEM,
+		payload: item,
+	};
+};
