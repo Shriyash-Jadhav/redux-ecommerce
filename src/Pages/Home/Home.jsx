@@ -14,7 +14,7 @@ import Layout from '../../Components/Layout'
 import Footer from '../../Components/Footer/Footer'
 const Home = () => {
     const dispatch = useDispatch();
-    const { products, loading, error } = useSelector((state) => state.products);
+    const { products, loading, error } = useSelector((state) => state.productss);
     useEffect(() => {
         dispatch(fetchAllProducts())
     }, [dispatch]);

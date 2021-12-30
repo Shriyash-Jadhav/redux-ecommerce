@@ -1,31 +1,40 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faStarHalf, faShoppingCart, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import {
-    Card,
     Container,
     Row,
-    Col,
-    Nav
+    Col
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { fetchRelatedProducts } from "../../Redux/Action/ProductsAction";
 import Navbar from '../../Components/Navbar/Navbar'
 import Footer from '../../Components/Footer/Footer'
-import "./SingleProduct.css";
 import RelatedProducts from '../../Components/RelatedProducts/RelatedProducts';
-const SingleProduct = () => {
+import { addToCart } from "../../Redux/Action/ProductsAction";
+import "./SingleProduct.css";
+const SingleProduct = ({ addToCart }) => {
     const [product, setProduct] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const dispatch = useDispatch();
-    const { relatedProducts, loading, error } = useSelector((state) => state.relatedProducts);
-    useEffect(() => {
-        dispatch(fetchRelatedProducts())
-    }, [dispatch]);
-    console.log("relatedProduct", relatedProducts);
+    // const dispatch = useDispatch();
+    // const { relatedProducts, loading, error } = useSelector((state) => state.relatedProducts);
+    // const { products, cart, currentItem } = useSelector((state) => state.products);
+
+    // useEffect(() => {
+    //     dispatch(fetchRelatedProducts())
+    // }, [dispatch]);
+    // console.log("relatedProduct", relatedProducts);
+
+    // useEffect((id) => {
+    //     dispatch(addToCart(id))
+    // }, []);
+    // console.log("pro", products);
+    console.log("products", addToCart);
+
+
     let { id } = useParams();
     useEffect(() => {
         setProduct(id)
@@ -122,7 +131,7 @@ const SingleProduct = () => {
                                 )} */}
                                 <button
                                     className="hero-product-cart-btn"
-                                // onClick={() => handlecart(data)}
+                                    onClick={() => addToCart(product)}
                                 >
                                     Add To Cart
                                 </button>
@@ -353,4 +362,15 @@ const SingleProduct = () => {
     )
 }
 
-export default SingleProduct
+// const mapStateToProps = (state) => {
+//     return {
+//         current: state.shop.currentItem,
+//     };
+// };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (id) => dispatch(addToCart(id)),
+    };
+};
+export default connect(null, mapDispatchToProps)(SingleProduct);

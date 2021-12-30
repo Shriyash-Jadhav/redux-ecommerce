@@ -23,29 +23,27 @@ export const fetchRelatedProducts = () => async (dispatch) => {
 	}
 };
 
-export const addToCart = (itemID) => {
-	return {
+export const addToCart = (dispatch, product) => {
+	dispatch({
 		type: ActionType.ADD_TO_CART,
-		payload: {
-			id: itemID,
-		},
-	};
+		id: product,
+	});
 };
 
-export const removeFromCart = (itemID) => {
+export const removeFromCart = (product) => {
 	return {
 		type: ActionType.REMOVE_FROM_CART,
 		payload: {
-			id: itemID,
+			id: product,
 		},
 	};
 };
 
-export const adjustItemQty = (itemID, qty) => {
+export const adjustItemQty = (product, qty) => {
 	return {
 		type: ActionType.ADJUST_ITEM_QTY,
 		payload: {
-			id: itemID,
+			id: product,
 			qty,
 		},
 	};

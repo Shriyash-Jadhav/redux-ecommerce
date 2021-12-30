@@ -23,7 +23,7 @@ const Example = (props) => {
             }}
         >
             <Navbar light expand="md">
-                <Navbar.Brand href="/">
+                <Navbar.Brand href="/home">
                     <img
                         src="https://flone.reactdemo.hasthemes.com/assets/img/logo/logo.png"
                         alt="logo"
