@@ -7,6 +7,7 @@ import About from "./Pages/About/About";
 import NotFound from "./Pages/NotFound/NotFound";
 import MyAccount from "./Pages/MyAccount/MyAccount";
 import SingleProduct from "./Pages/SingleProduct/SingleProduct";
+import Cart from "./Pages/Cart/Cart";
 function App() {
 	return (
 		<BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
 				<Route path="/contact" exact element={<Contact />} />
 				<Route path="/about" exact element={<About />} />
 				<Route path="/my-account" exact element={<MyAccount />} />
+				<Route path="/cart" exact element={<Cart />} />
 				<Route path="*" exact element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>

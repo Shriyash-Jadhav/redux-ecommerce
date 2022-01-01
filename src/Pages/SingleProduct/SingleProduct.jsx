@@ -16,9 +16,9 @@ import Footer from '../../Components/Footer/Footer'
 import RelatedProducts from '../../Components/RelatedProducts/RelatedProducts';
 import { addToCart } from "../../Redux/Action/ProductsAction";
 import "./SingleProduct.css";
-const SingleProduct = ({ addToCart }) => {
-    const [product, setProduct] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+const SingleProduct = ({ addToCart, current, cart }) => {
+    // const [product, setProduct] = useState([]);
+    // const [isLoading, setIsLoading] = useState(true);
     // const dispatch = useDispatch();
     // const { relatedProducts, loading, error } = useSelector((state) => state.relatedProducts);
     // const { products, cart, currentItem } = useSelector((state) => state.products);
@@ -32,37 +32,37 @@ const SingleProduct = ({ addToCart }) => {
     //     dispatch(addToCart(id))
     // }, []);
     // console.log("pro", products);
-    console.log("products", addToCart);
+    console.log("products", current);
 
 
-    let { id } = useParams();
-    useEffect(() => {
-        setProduct(id)
-        axios
-            .get(`https://fakestoreapi.com/products/${id}`)
-            .then((res) => {
-                setIsLoading(false);
-                setProduct(res.data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
-    if (isLoading) {
-        return (
-            <div
-                style={{
-                    textAlign: "center",
-                    marginTop: "2rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <h1>Loading...</h1>
-            </div>
-        );
-    }
+    // let { id } = useParams();
+    // useEffect(() => {
+    //     setProduct(id)
+    //     axios
+    //         .get(`https://fakestoreapi.com/products/${id}`)
+    //         .then((res) => {
+    //             setIsLoading(false);
+    //             setProduct(res.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    // }, []);
+    // if (isLoading) {
+    //     return (
+    //         <div
+    //             style={{
+    //                 textAlign: "center",
+    //                 marginTop: "2rem",
+    //                 display: "flex",
+    //                 justifyContent: "center",
+    //                 alignItems: "center",
+    //             }}
+    //         >
+    //             <h1>Loading...</h1>
+    //         </div>
+    //     );
+    // }
     return (
         <div>
             <Navbar />
@@ -77,7 +77,7 @@ const SingleProduct = ({ addToCart }) => {
                     Home{" "}
                     <strong style={{ fontWeight: "500", color: "#000000" }}>
                         {" "}
-                        / {product?.title}
+                        / {current?.title}
                     </strong>{" "}
                 </p>
             </div>
@@ -85,11 +85,12 @@ const SingleProduct = ({ addToCart }) => {
                 <Row>
                     <>
                         <Col xs="12" sm="6">
-                            <img src={product?.image} alt="" className="singleproduct-image" />
+                            <img src={current?.image} alt="" className="singleproduct-image" />
                         </Col>
                         <Col xs="12" sm="6">
-                            <h3 className="singleproduct-category">{product?.category}</h3>
-                            <h4 className="singleproduct-title">{product?.title}</h4>
+                            <h3 className="singleproduct-category">{current?.category}</h3>
+                            <h4 className="singleproduct-title">{current?.title}</h4>
+
                             <FontAwesomeIcon
                                 icon={faStar}
                                 className="single-product-rating-star"
@@ -110,8 +111,8 @@ const SingleProduct = ({ addToCart }) => {
                                 icon={faStarHalf}
                                 className="single-product-rating-star"
                             />
-                            <h4 className="singleproduct-price">$ {product?.price} /-</h4>
-                            <p className="singleproduct-description">{product?.description}</p>
+                            <h4 className="singleproduct-price">$ {current?.price} /-</h4>
+                            <p className="singleproduct-description">{current?.description}</p>
                             <div>
                                 <button className="hero-product-btn">Buy Now</button>
                                 {/* {isAlreadyInCart === false ? (
@@ -131,7 +132,7 @@ const SingleProduct = ({ addToCart }) => {
                                 )} */}
                                 <button
                                     className="hero-product-cart-btn"
-                                    onClick={() => addToCart(product)}
+                                    onClick={() => addToCart(current.id)}
                                 >
                                     Add To Cart
                                 </button>
@@ -356,21 +357,26 @@ const SingleProduct = ({ addToCart }) => {
 
                     <RelatedProducts />
                 </div>
+                <p>
+
+                </p>
             </Container>
+
             <Footer />
         </div>
     )
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         current: state.shop.currentItem,
-//     };
-// };
+const mapStateToProps = (state) => {
+    return {
+        current: state.productss.currentItem,
+        cart: state.productss.cart,
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addToCart: (id) => dispatch(addToCart(id)),
     };
 };
-export default connect(null, mapDispatchToProps)(SingleProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

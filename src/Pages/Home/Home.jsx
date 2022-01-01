@@ -9,26 +9,32 @@ import {
     Col,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { fetchAllProducts } from "../../Redux/Action/ProductsAction";
+import {
+    loadCurrentItem,
+    addToCart,
+} from "../../Redux/Action/ProductsAction";
+import { connect } from "react-redux";
 import Layout from '../../Components/Layout'
 import Footer from '../../Components/Footer/Footer'
-const Home = () => {
-    const dispatch = useDispatch();
-    const { products, loading, error } = useSelector((state) => state.productss);
-    useEffect(() => {
-        dispatch(fetchAllProducts())
-    }, [dispatch]);
-    console.log(products);
-    if (loading) {
-        return (
-            <h1>
-                Loading...
-            </h1>
-        )
-    }
-    if (error != null) {
-        return { error }
-    }
+const Home = ({ products, addToCart, loadCurrentItem }) => {
+    // const dispatch = useDispatch();
+    // const { products, loadCurrentItem, error } = useSelector((state) => state.productss);
+    // useEffect(() => {
+    //     dispatch(fetchAllProducts())
+    // }, [dispatch]);
+    // console.log(product);
+    // console.log("prooo", products);
+
+    // if (loading) {
+    //     return (
+    //         <h1>
+    //             Loading...
+    //         </h1>
+    //     )
+    // }
+    // if (error != null) {
+    //     return { error }
+    // }
 
     return (
         <div>
@@ -125,20 +131,22 @@ const Home = () => {
                     <p>Lorem ipsum dolor sit amet conse ctetu.</p>
                 </div>
                 <Row>
-                    {products && products.map((list) => (
+                    {products && products.map((product) => (
                         <Col xs="12" sm="3">
-                            <Card className="product-list" key={list?.id}>
+                            <Card className="product-list" key={product?.id}>
 
                                 <Card.Img
                                     className="product-img"
-                                    src={list?.image}
+                                    src={product?.image}
                                     alt="Card image cap"
                                 />
                                 <Link
-                                    to={`/home/${list?.id}`}
+                                    to={`/home/${product?.id}`}
                                     style={{ textDecoration: "none" }}
                                 >
-                                    <div className="shop-btn-div">
+                                    <div className="shop-btn-div"
+                                        onClick={() => loadCurrentItem(product)}
+                                    >
                                         <FontAwesomeIcon
                                             icon={faShoppingCart}
                                             className="product-list-shop-btn"
@@ -156,21 +164,22 @@ const Home = () => {
                             </Card>
                             <Card.Body>
                                 <Card.Title className="product-title" tag="h5">
-                                    {list?.title.length > 40
-                                        ? list?.title.slice(0, 40) + "..."
-                                        : list?.title}
+                                    {product?.title.length > 40
+                                        ? product?.title.slice(0, 40) + "..."
+                                        : product?.title}
                                     {/* {list?.title} */}
                                 </Card.Title>
                                 <div style={{ display: "flex" }}>
-                                    <p>${list?.price} -</p>
+                                    <p>${product?.price} -</p>
                                     <p style={{ color: "#FA6BFF", marginLeft: "10px" }}>
-                                        <strike>${Math.round(list?.price + 50)}</strike>
+                                        <strike>${Math.round(product?.price + 50)}</strike>
                                     </p>
                                 </div>
 
                             </Card.Body>
                         </Col>
                     ))}
+
                 </Row>
 
             </Container>
@@ -179,4 +188,17 @@ const Home = () => {
     )
 }
 
-export default Home
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.productss.products,
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (id) => dispatch(addToCart(id)),
+        loadCurrentItem: (item) => dispatch(loadCurrentItem(item)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

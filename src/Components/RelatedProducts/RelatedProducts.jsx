@@ -239,7 +239,7 @@ const RelatedProducts = () => {
                         </TabPane>
                     </TabContent> */}
 
-                    <div style={{ margin: "50px 0px 0px 0px" }}>
+                    {/* <div style={{ margin: "50px 0px 0px 0px" }}>
                         <h2 style={{ textAlign: "center", color: "#000000" }}>
                             <strong>Related Products</strong>
                         </h2>
@@ -278,29 +278,6 @@ const RelatedProducts = () => {
                                                 ? list?.title.slice(0, 25) + "..."
                                                 : list?.title}
                                         </Card.Title>
-                                        {/* <CardSubtitle tag="h6" className="mb-2 text-muted">
-											Description
-										</CardSubtitle>
-										<CardText>
-											{list?.description.length > 100
-												? list?.description.slice(0, 100) + "..."
-												: list?.description}
-										</CardText> */}
-                                        {/* {isAlreadyInCart === false ? (
-										<button
-											className="hero-product-cart-btn"
-											onClick={() => handlecart(singleProducts)}
-										>
-											Add To Cart
-										</button>
-									) : (
-										<button
-											className="hero-product-cart-btn"
-											onClick={() => handlecart(singleProducts)}
-										>
-											Remove To Cart
-										</button>
-									)} */}
                                         <div style={{ display: "flex" }}>
                                             <p>${list?.price} -</p>
                                             <p style={{ color: "#FA6BFF", marginLeft: "10px" }}>
@@ -311,7 +288,7 @@ const RelatedProducts = () => {
                                 </Col>
                             ))}
                         </Row>
-                    </div>
+                    </div> */}
                 </div>
             </Container>
         </div>

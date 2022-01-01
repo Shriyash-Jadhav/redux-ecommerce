@@ -1,15 +1,6 @@
 import * as ActionType from "./ActionType";
 import axios from "axios";
 
-export const fetchAllProducts = () => async (dispatch) => {
-	try {
-		dispatch({ type: ActionType.PRODUCTS_REQUEST });
-		const { data } = await axios.get("https://fakestoreapi.com/products/");
-		dispatch({ type: ActionType.PRODUCTS_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({ type: ActionType.PRODUCTS_FAIL });
-	}
-};
 
 export const fetchRelatedProducts = () => async (dispatch) => {
 	try {
@@ -23,27 +14,29 @@ export const fetchRelatedProducts = () => async (dispatch) => {
 	}
 };
 
-export const addToCart = (dispatch, product) => {
-	dispatch({
-		type: ActionType.ADD_TO_CART,
-		id: product,
-	});
-};
-
-export const removeFromCart = (product) => {
+export const addToCart = (itemID) => {
 	return {
-		type: ActionType.REMOVE_FROM_CART,
+		type: ActionType.ADD_TO_CART,
 		payload: {
-			id: product,
+			id: itemID,
 		},
 	};
 };
 
-export const adjustItemQty = (product, qty) => {
+export const removeFromCart = (itemID) => {
+	return {
+		type: ActionType.REMOVE_FROM_CART,
+		payload: {
+			id: itemID,
+		},
+	};
+};
+
+export const adjustItemQty = (itemID, qty) => {
 	return {
 		type: ActionType.ADJUST_ITEM_QTY,
 		payload: {
-			id: product,
+			id: itemID,
 			qty,
 		},
 	};

@@ -64,9 +64,9 @@ const Example = (props) => {
                         <Nav.Link
                             className="nav-items"
                             style={{ color: "black" }}
-                            href="/home"
+                            href="/cart"
                         >
-                            Blogs
+                            Carts
                         </Nav.Link>
 
                         {/* 
