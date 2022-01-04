@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Navbar,
-    Nav
+    Nav,
+    Badge
 } from "react-bootstrap";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
-const Example = (props) => {
+const Example = ({ cart }) => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const [cartCount, setCartCount] = useState(0);
+    useEffect(() => {
+        let count = 0;
+        cart.forEach((item) => {
+            count += item.qty
+        })
+        setCartCount(count);
+    }, [cart, cartCount]);
     const toggle = () => setIsOpen(!isOpen);
 
     return (
@@ -61,13 +70,13 @@ const Example = (props) => {
                         </Nav.Link>
 
 
-                        <Nav.Link
+                        {/* <Nav.Link
                             className="nav-items"
                             style={{ color: "black" }}
                             href="/cart"
                         >
                             Carts
-                        </Nav.Link>
+                        </Nav.Link> */}
 
                         {/* 
                         <Nav.Link
@@ -95,6 +104,9 @@ const Example = (props) => {
                             href="/cart"
                         >
                             <FontAwesomeIcon icon={faShoppingCart} />
+                            <span className="cart-count">
+                                {cartCount}
+                            </span>
                         </Nav.Link>
 
                     </Nav>
@@ -104,5 +116,9 @@ const Example = (props) => {
         </div>
     );
 };
-
-export default Example;
+const mapStateToProps = (state) => {
+    return {
+        cart: state.productss.cart,
+    };
+};
+export default connect(mapStateToProps)(Example);

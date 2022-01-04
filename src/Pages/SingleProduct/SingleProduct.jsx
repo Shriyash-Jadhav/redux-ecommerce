@@ -16,6 +16,7 @@ import Footer from '../../Components/Footer/Footer'
 import RelatedProducts from '../../Components/RelatedProducts/RelatedProducts';
 import { addToCart } from "../../Redux/Action/ProductsAction";
 import "./SingleProduct.css";
+import ScrollToTop from '../../ScrollToTop';
 const SingleProduct = ({ addToCart, current, cart }) => {
     // const [product, setProduct] = useState([]);
     // const [isLoading, setIsLoading] = useState(true);
@@ -142,7 +143,7 @@ const SingleProduct = ({ addToCart, current, cart }) => {
                 </Row>
                 <div
                     style={{
-                        padding: "35px 0px",
+                        padding: "0px 0px",
                     }}
                 >
                     {/* <Nav
@@ -363,6 +364,7 @@ const SingleProduct = ({ addToCart, current, cart }) => {
             </Container>
 
             <Footer />
+            <ScrollToTop />
         </div>
     )
 }
