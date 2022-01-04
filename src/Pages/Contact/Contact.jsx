@@ -23,9 +23,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
+import { Helmet } from "react-helmet";
 const Contact = () => {
     return (
         <div>
+            <Helmet>
+                <title>Contact Us</title>
+                <meta name="description" content="Contact us" />
+            </Helmet>
             <Navbar />
             <div
                 style={{
@@ -220,8 +225,8 @@ const Contact = () => {
                                     />
                                 </Form.Group>
 
-                                <button className="hero-product-btn">Submit</button>
                             </Form>
+                            <button className="hero-product-btn">Submit</button>
                         </Col>
                     </Row>
                 </div>

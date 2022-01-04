@@ -6,6 +6,7 @@ import { faTrashAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
 import CartItem from "./CartItem";
+import { Helmet } from "react-helmet";
 
 const Cart = ({ cart }) => {
 	const [totalQty, setTotalQty] = useState(0);
@@ -23,6 +24,10 @@ const Cart = ({ cart }) => {
 	}, [cart, totalQty, setTotalQty, totalPrice, setTotalPrice]);
 	return (
 		<div>
+			<Helmet>
+				<title>Cart</title>
+				<meta name="description" content="Cart Products" />
+			</Helmet>
 			<Navbar />
 			<div
 				style={{
@@ -118,13 +123,13 @@ const Cart = ({ cart }) => {
 									placeholder="Enter your Address "
 								/>
 							</Form.Group>
-							<button
-								className="hero-product-cart-btn"
-								style={{ marginTop: "10px" }}
-							>
-								Submit
-							</button>
 						</Form>
+						<button
+							className="hero-product-cart-btn"
+							style={{ marginTop: "10px" }}
+						>
+							Submit
+						</button>
 					</Col>
 					<Col>
 						<h5>
@@ -142,13 +147,13 @@ const Cart = ({ cart }) => {
 									placeholder="Type `Abhishek Sir Is Great` to get all products free"
 								/>
 							</Form.Group>
-							<button
-								className="hero-product-cart-btn"
-								style={{ marginTop: "35px" }}
-							>
-								Submit
-							</button>
 						</Form>
+						<button
+							className="hero-product-cart-btn"
+							style={{ marginTop: "35px" }}
+						>
+							Submit
+						</button>
 					</Col>
 					<Col>
 						<h5>

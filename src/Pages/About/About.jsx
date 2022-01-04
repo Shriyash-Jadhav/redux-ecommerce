@@ -3,10 +3,15 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { Container, Row, Col } from "react-bootstrap";
 import Footer from "../../Components/Footer/Footer";
 import "../Pages.css";
+import { Helmet } from "react-helmet";
 
 const About = () => {
     return (
         <div>
+            <Helmet>
+                <title>About</title>
+                <meta name="description" content="About us" />
+            </Helmet>
             <Navbar />
             <div
                 style={{
@@ -30,7 +35,7 @@ const About = () => {
                 <h3
                     style={{ fontSize: "30px", color: "#433f3f", marginBottom: "30px" }}
                 >
-                    Welcome To Flone
+                    Welcome To Shopntag
                 </h3>
                 <p style={{ fontSize: "16px", color: "#4b4b4b" }}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do

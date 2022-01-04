@@ -33,11 +33,14 @@ const Example = ({ cart }) => {
         >
             <Navbar light expand="md">
                 <Navbar.Brand href="/home">
-                    <img
+                    {/* <img
                         src="https://flone.reactdemo.hasthemes.com/assets/img/logo/logo.png"
                         alt="logo"
                         style={{ padding: "1rem" }}
-                    />
+                    /> */}
+                    <h3 style={{ color: "#A749FF" }}>
+                        Shopntag
+                    </h3>
                 </Navbar.Brand>
                 <Navbar.Toggle onClick={toggle} />
                 <Navbar.Collapse isOpen={isOpen} navbar style={{ justifyContent: "flex-end" }}>

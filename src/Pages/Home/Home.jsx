@@ -140,27 +140,35 @@ const Home = ({ products, addToCart, loadCurrentItem }) => {
                                     src={product?.image}
                                     alt="Card image cap"
                                 />
-                                <Link
-                                    to={`/home/${product?.id}`}
-                                    style={{ textDecoration: "none" }}
+                                <div className="shop-btn-div"
                                 >
-                                    <div className="shop-btn-div"
-                                        onClick={() => loadCurrentItem(product)}
+                                    <Link
+                                        to={`/home/${product?.id}`}
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <div
+                                            onClick={() => loadCurrentItem(product)}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faEye}
+                                                className="product-list-shop-btn"
+                                            />
+                                        </div>
+                                    </Link>
+                                    <div
+                                        onClick={() => addToCart(product.id)}
+                                        style={{ cursor: "pointer" }}
                                     >
                                         <FontAwesomeIcon
                                             icon={faShoppingCart}
                                             className="product-list-shop-btn"
                                         />
-                                        <FontAwesomeIcon
-                                            icon={faEye}
-                                            className="product-list-shop-btn"
-                                        />
-                                        <FontAwesomeIcon
+                                    </div>
+                                </div>
+                                {/* <FontAwesomeIcon
                                             icon={faHeart}
                                             className="product-list-shop-btn"
-                                        />
-                                    </div>
-                                </Link>
+                                        /> */}
                             </Card>
                             <Card.Body>
                                 <Card.Title className="product-title" tag="h5">

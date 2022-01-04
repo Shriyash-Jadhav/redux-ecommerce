@@ -17,6 +17,8 @@ import RelatedProducts from '../../Components/RelatedProducts/RelatedProducts';
 import { addToCart } from "../../Redux/Action/ProductsAction";
 import "./SingleProduct.css";
 import ScrollToTop from '../../ScrollToTop';
+import { Helmet } from "react-helmet";
+
 const SingleProduct = ({ addToCart, current, cart }) => {
     // const [product, setProduct] = useState([]);
     // const [isLoading, setIsLoading] = useState(true);
@@ -66,6 +68,10 @@ const SingleProduct = ({ addToCart, current, cart }) => {
     // }
     return (
         <div>
+            <Helmet>
+                <title>{current?.title}</title>
+                <meta name="description" content="Single Product" />
+            </Helmet>
             <Navbar />
             <div
                 style={{

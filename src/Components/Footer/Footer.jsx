@@ -5,13 +5,16 @@ function Footer() {
         <Container style={{ padding: "8rem 0" }}>
             <Row>
                 <Col xs="12" sm="3">
-                    <img
+                    {/* <img
                         src="https://flone.reactdemo.hasthemes.com/assets/img/logo/logo.png"
                         alt="logo"
                         style={{ padding: "1rem 0" }}
-                    />
+                    /> */}
+                    <h3 style={{ color: "#000000" }}>
+                        Shopntag
+                    </h3>
                     <p>
-                        © 2021 Flone. <br /> All Rights Reserved
+                        © 2021 Shopntag. <br /> All Rights Reserved
                     </p>
                 </Col>
                 <Col xs="6" sm="3">
