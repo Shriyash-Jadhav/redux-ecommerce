@@ -144,7 +144,7 @@ const Cart = ({ cart }) => {
 									type="textarea"
 									name="text"
 									id="exampleText"
-									placeholder="Type `Abhishek Sir Is Great` to get all products free"
+									placeholder="Type `DIWALI` to get all products free"
 								/>
 							</Form.Group>
 						</Form>
